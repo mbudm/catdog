@@ -14,16 +14,16 @@ var ImageResults = React.createClass({
   mixins: [
 		Router.Navigation
 	],
-  propTypes: {
+  /*propTypes: {
 		query: React.PropTypes.string
-	},
+	},*/
   getInitialState: function() {
 		return {
 			results: [],
       query: ''
 		};
 	},
-  componentWillMount: function() {
+  componentDidMount: function() {
     var query = this.props.params.query; //
     var cmp = this;
     if (query) {
@@ -43,7 +43,7 @@ var ImageResults = React.createClass({
             data = response.photos;
           }
           eval("("+ txt + ")");
-          console.log("server returned: ", data);
+          console.log("server returned: ", data, cmp);
           cmp.setState({results: data.photo });
     	  }, function (err) {
     	    console.log("xhr failure: ", err);
@@ -51,17 +51,20 @@ var ImageResults = React.createClass({
     }
   },
 	render: function () {
-
+    console.log('renderin', this.state.results);
     var createImage = function(result) {
-      if(result.pagemap && result.pagemap.cse_image && result.pagemap.cse_image.length > 0){
-        var src = 'https://farm{farm}.staticflickr.com/{server}/{id}_{secret}.jpg'.format(result);
+      if(result.farm && result.server && result.id){
+        console.log('result not null ',result);
+        var src = format('https://farm{farm}.staticflickr.com/{server}/{id}_{secret}.jpg', result);
+        console.log('result not null ',src);
   			return (
   				<li key={result.id} >
   					<img src={src} alt={result.title} />
   				</li>
   			);
       }else{
-        return null;
+        console.log('result null',result);
+        //return null;
       }
 		};
 		return (
