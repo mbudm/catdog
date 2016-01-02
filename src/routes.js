@@ -11,15 +11,10 @@ var Redirect = Router.Redirect;
 var routes = (
   <Route name="app" path="/" handler={require('./components/app')}>
     <DefaultRoute handler={require('./components/homePage')} />
-    <Route name="authors" handler={require('./components/authors/authorPage')} />
-    <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage')} />
-    <Route name="manageAuthor" path="author/:id" handler={require('./components/authors/manageAuthorPage')} />
+    <Route name="play" path="play" handler={require('./components/play/playPage')} />
     <Route name="imageResults" path="images/:query" handler={require('./components/images/imageResultsPage')} />
     <Route name="about" handler={require('./components/about/aboutPage')} />
     <NotFoundRoute handler={require('./components/notFoundPage')} />
-    <Redirect from="about-us" to="about" />
-    <Redirect from="awthurs" to="authors" />
-    <Redirect from="about/*" to="about" />
   </Route>
 );
 

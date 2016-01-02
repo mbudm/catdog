@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Router = require('react-router');
-var AuthorApi = require('../../api/authorApi');
+var ImageApi = require('../../api/imageApi');
 
 var format = require('string-format');
 
@@ -27,7 +27,7 @@ var ImageResults = React.createClass({
     var query = this.props.params.query; //
     var cmp = this;
     if (query) {
-      var ps = AuthorApi.getResults(query);
+      var ps = ImageApi.getResults(query);
       console.log('then', ps.then);
       ps.then(Qajax.filterSuccess)
     	  .get("responseText") // using a cool Q feature here
